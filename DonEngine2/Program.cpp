@@ -28,7 +28,7 @@ void Program::Initialize(const char* name, int screenWidth, int screenHeight, bo
 		glContext = SDL_GL_CreateContext(window);
 		gladLoadGL();
 		glViewport(0, 0, this->screenWidth, this->screenHeight);
-		glClearColor(0.9294f, 0.7078f, 0.4819f, 1.0f);
+		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glEnable(GL_DEPTH_TEST);
 
 		std::cout << "Window Created..." << std::endl;
@@ -43,7 +43,7 @@ void Program::Initialize(const char* name, int screenWidth, int screenHeight, bo
 		//creating default camera
 		delete mainCamera;
 		mainCamera = new Camera(45.0f, 0.1f, 100.0f, this->screenHeight, this->screenWidth);
-		mainCamera->SetPosition(0.0f, 0.0f, -10.0f);
+		mainCamera->SetPosition(0.0f, 0.0f, -15.0f);
 
 		isRunning = true;
 		std::cout << "Program Starting..." << std::endl;
@@ -124,11 +124,33 @@ void Program::Clean()
 //code what you want to happen on start here
 void Program::Start()
 {
+	//setting camera rotation to look downwards
+	mainCamera->SetRotation(25, 0, 0);
 
+	//creating the Earth and Moon, setting moon position and scale, then making moon a child of earth and earth a child of sun
+	Model* sun = new Model("Sun", "SunTest");
+	Model* earth = new Model("Earth", "EarthTest");
+	Model* moon = new Model("Moon", "MoonTest");
+
+	moon->SetPosition(2.5, 0, 0);
+	moon->SetScale(0.25, 0.25, 0.25);
+	sceneObjects.push_back(moon);
+
+	earth->AddChild(moon);
+	sceneObjects.push_back(earth);
+	earth->SetPosition(2.5, 0, 0);
+	earth->SetScale(0.25, 0.25, 0.25);
+
+	sun->AddChild(earth);
+	sceneObjects.push_back(sun);
 }
 
 //code what you want to happen on update here
 void Program::Update()
 {
-	
+	//rotating all planets
+	for (int i = 0; i < sceneObjects.size(); i++)
+	{
+		sceneObjects.at(i)->Rotate(0, i+0.1, 0);
+	}
 }

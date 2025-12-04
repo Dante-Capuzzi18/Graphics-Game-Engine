@@ -178,7 +178,7 @@ public:
 		this->AddChild(new Mesh(tempObjName.c_str(), tempVertices, tempIndices, tempTexture));
 
 		//SimObject requirements
-		UpdateModelMatrix();
+		UpdateModelMatrix(modelMatrix);
 
 		//cleaning up
 		inMtlFile.close();

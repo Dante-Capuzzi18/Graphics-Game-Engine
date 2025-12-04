@@ -29,7 +29,7 @@ public:
     SimObject(const char* name, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale); //will make a new object at pos/rot/scl
 
     //MODEL MATRIX
-    void UpdateModelMatrix(); //updates this model matrix and then updates all children matrices
+    void UpdateModelMatrix(const glm::mat4& parent); //updates this model matrix and then updates all children matrices
 
     //TRANSFORM
     void Translate(float x, float y, float z); //will move the object in world space

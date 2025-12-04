@@ -3,7 +3,7 @@
 Camera::Camera(float FOV, float nearPlane, float farPlane, int screenHeight, int screenWidth)
     : SimObject("MainCamera"), FOV(FOV), nearPlane(nearPlane), farPlane(farPlane), screenWidth(screenWidth), screenHeight(screenHeight), viewMatrix(glm::mat4(1.0f)), projectionMatrix(glm::mat4(1.0f))
 {
-    UpdateModelMatrix();
+    UpdateModelMatrix(modelMatrix);
     this->SetPerspective(this->FOV, this->nearPlane, this->farPlane);
 }
 
