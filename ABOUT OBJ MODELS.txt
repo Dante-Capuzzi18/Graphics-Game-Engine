@@ -1,0 +1,7 @@
+For right now, the model loader isn't too comprehensive. It will only use the texture image from "map_Kd" as the texture and nothing else in the MTL file and the OBJ part of the loader doesnt use "s" yet. Make sure you only have one material and one mesh per loaded Model as well, as at the moment multiple meshes aren't supported.
+
+When making a model in Blender or something, make sure that all faces are triangulated as well.
+
+To get around the one material thing, you need to map the faces to the particular UV's for the model and then can use an image with as many textures as you need. think tilemaps
+
+if a texture isn't showing up correctly, check that the mtl file's map_kd filepath has no spaces in it and that your texture file is in the 'Textures' folder. You may get rid of the entire string and just put the texture png's name like "Wood.png" as it just looks for the filename, but be aware that stuff like Blender will include the entire path you use.
